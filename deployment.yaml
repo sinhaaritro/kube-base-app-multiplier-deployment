@@ -16,6 +16,8 @@ spec:
         # This label is applied to the Pods, allowing the Service to find them
         app: multiplier-app
     spec:
+      imagePullSecrets:
+      - name: ghcr-creds
       containers:
       - name: multiplier-container
         # This is the exact image you built and pushed to the GitHub Container Registry
