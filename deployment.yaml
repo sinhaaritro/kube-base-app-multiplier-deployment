@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # A unique name for your deployment object in Kubernetes
+  name: multiplier-app-deployment
+spec:
+  # Run one copy of your application
+  replicas: 1
+  selector:
+    matchLabels:
+      # This label is used to link this Deployment to its Pods
+      app: multiplier-app
+  template:
+    metadata:
+      labels:
+        # This label is applied to the Pods, allowing the Service to find them
+        app: multiplier-app
+    spec:
+      containers:
+      - name: multiplier-container
+        # This is the exact image you built and pushed to the GitHub Container Registry
+        image: ghcr.io/sinhaaritro/kube-base-app-multiplier:v1.0.0
+        # This policy ensures Kubernetes always tries to pull the image,
+        # which is useful when re-using tags.
+        imagePullPolicy: Always
+        ports:
+        # The port your Deno application listens on inside the container
+        - containerPort: 8000
+        # This section defines the environment variables to pass to the container
+        env:
+        - name: "WELCOME_MESSAGE"
+          value: "Running live in Kubernetes!"
