@@ -1,0 +1,1 @@
+Kubernetes setup for [kube-base-app-multiplier](https://github.com/sinhaaritro/kube-base-app-multiplier)
